@@ -3,6 +3,9 @@ import os;
 
 class FixImports:
 
+	
+	_SCRIPT_NAME = 'fix-imports.py';
+
 
 	def __init__(self, projectPath):
 		self._projectPath = projectPath;
@@ -33,11 +36,11 @@ class FixImports:
 	def fix(self):
 		for root, dirs, files in os.walk('.'):
 			for file in files:
-				if file.endswith('.py'):
+				if file.endswith('.py') and (file != self._SCRIPT_NAME):
 					self.read_file(file);
 
 
 
 if __name__ == '__main__':
-	imports = FixImports('test.py');
+	imports = FixImports('');
 	imports.fix();
