@@ -42,7 +42,7 @@ class FixImports:
 		for root, dirs, files in os.walk('.'):
 			for file in files:
 				if file.endswith('.py') and (file != self._SCRIPT_NAME):
-					content = self.read_file(file);
+					content = self.read_file(root + '/' + file);
 
 
 
