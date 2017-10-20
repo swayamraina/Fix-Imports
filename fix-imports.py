@@ -13,8 +13,13 @@ class FixImports:
 		self._failedImports = [];
 
 
-	def read_file(self, file):
-		print(file);
+	def read_file(self, file_path):
+		try:
+			file = open(file_path, 'r');
+		except FileNotFoundError as error:
+			print(error);
+			return [];
+		return file.readlines();
 
 
 	def extract_imports(self):
@@ -37,7 +42,7 @@ class FixImports:
 		for root, dirs, files in os.walk('.'):
 			for file in files:
 				if file.endswith('.py') and (file != self._SCRIPT_NAME):
-					self.read_file(file);
+					content = self.read_file(file);
 
 
 
