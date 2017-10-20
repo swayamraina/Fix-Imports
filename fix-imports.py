@@ -7,7 +7,7 @@ class FixImports:
 	_SCRIPT_NAME = 'fix-imports.py';
 
 
-	def __init__(self, projectPath):
+	def __init__(self, project_path):
 		self._project_path = project_path;
 		self._imports = [];
 		self._failed_imports = [];
@@ -67,5 +67,5 @@ class FixImports:
 
 
 if __name__ == '__main__':
-	imports = FixImports('');
+	imports = FixImports(os.getcwd());
 	imports.fix();
