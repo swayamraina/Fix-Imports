@@ -41,8 +41,13 @@ class FixImports:
 		return imports;
 
 
-	def try_import(self):
-		print('yet to be implemented');
+	def try_imports(self):
+		for import_pkg in self._imports:
+			try:
+				__import__(import_pkg);
+			except ImportError as error:
+				print(error);
+				self._failed_imports.append(import_pkg);
 
 
 	def add_to_failed_imports(self):
