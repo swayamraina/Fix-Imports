@@ -22,8 +22,23 @@ class FixImports:
 		return file.readlines();
 
 
-	def extract_imports(self):
-		print('yet to be implemented');
+	def extract_imports(self, file_content):
+		imports = [];
+		for line_content in file_content:
+			line_content = line_content.strip();
+			if not line_content.startswith('#'):
+				words = line_content.split(' ');
+				for index in range(len(words)):
+					if words[index] == 'from' or words[index] == 'import':
+						index = index + 1;
+						while words[index] == '':
+							index = index + 1;
+						if words[index].endswith(';'):
+							imports.append(words[index][:-1]);
+						else:
+							imports.append(words[index]);
+						break;
+		return imports;
 
 
 	def try_import(self):
