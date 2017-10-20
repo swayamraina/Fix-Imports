@@ -8,9 +8,9 @@ class FixImports:
 
 
 	def __init__(self, projectPath):
-		self._projectPath = projectPath;
+		self._project_path = project_path;
 		self._imports = [];
-		self._failedImports = [];
+		self._failed_imports = [];
 
 
 	def read_file(self, file_path):
