@@ -50,10 +50,6 @@ class FixImports:
 				self._failed_imports.append(import_pkg);
 
 
-	def add_to_failed_imports(self):
-		print('yet to be implemented');
-
-
 	def download_libraries(self):
 		print('yet to be implemented');
 
@@ -62,7 +58,11 @@ class FixImports:
 		for root, dirs, files in os.walk('.'):
 			for file in files:
 				if file.endswith('.py') and (file != self._SCRIPT_NAME):
-					content = self.read_file(root + '/' + file);
+					file_content = self.read_file(root + '/' + file);
+					for import_pkg in self.extract_imports(file_content):
+						if import_pkg not in self._imports:
+							self._imports.append(import_pkg);
+		self.try_imports();
 
 
 
