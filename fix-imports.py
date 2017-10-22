@@ -60,7 +60,7 @@ class FixImports:
 			try:
 				print(import_pkg);
 				pip.main(['install',import_pkg]);
-			except PermissionError as error:
+			except SystemExit as error:
 				print(error);
 
 
