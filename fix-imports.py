@@ -51,7 +51,17 @@ class FixImports:
 
 
 	def download_libraries(self):
-		print('yet to be implemented');
+		try:
+			import pip;
+		except ImportError as error:
+			print(error);
+			return ;
+		for import_pkg in self._failed_imports:
+			try:
+				print(import_pkg);
+				pip.main(['install',import_pkg]);
+			except PermissionError as error:
+				print(error);
 
 
 	def fix(self):
@@ -63,6 +73,7 @@ class FixImports:
 						if import_pkg not in self._imports:
 							self._imports.append(import_pkg);
 		self.try_imports();
+		self.download_libraries();
 
 
 
