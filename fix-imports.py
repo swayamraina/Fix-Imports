@@ -9,6 +9,7 @@ class FixImports:
 
 	def __init__(self, project_path):
 		self._project_path = project_path;
+		self._files = [];
 		self._imports = [];
 		self._failed_imports = [];
 
@@ -41,6 +42,12 @@ class FixImports:
 		return imports;
 
 
+	def remove_local_packages(self):
+		for file in self._files:
+			if file in self._imports:
+				self._imports.remove(file);
+
+
 	def try_imports(self):
 		for import_pkg in self._imports:
 			try:
@@ -58,7 +65,6 @@ class FixImports:
 			return ;
 		for import_pkg in self._failed_imports:
 			try:
-				print(import_pkg);
 				pip.main(['install',import_pkg]);
 			except SystemExit as error:
 				print(error);
@@ -67,11 +73,13 @@ class FixImports:
 	def fix(self):
 		for root, dirs, files in os.walk('.'):
 			for file in files:
-				if file.endswith('.py') and (file != self._SCRIPT_NAME):
+				if file.strip().endswith('.py') and (file != self._SCRIPT_NAME):
+					self._files.append(file.strip()[:-3]);
 					file_content = self.read_file(root + '/' + file);
 					for import_pkg in self.extract_imports(file_content):
 						if import_pkg not in self._imports:
 							self._imports.append(import_pkg);
+		self.remove_local_packages();
 		self.try_imports();
 		self.download_libraries();
 
