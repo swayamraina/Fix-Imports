@@ -1,2 +1,2 @@
-import url_parser;
+import pandas;
 import tinytree;
