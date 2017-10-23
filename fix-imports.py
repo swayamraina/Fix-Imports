@@ -71,7 +71,7 @@ class FixImports:
 
 
 	def fix(self):
-		for root, dirs, files in os.walk('.'):
+		for root, dirs, files in os.walk(self._project_path):
 			for file in files:
 				if file.strip().endswith('.py') and (file != self._SCRIPT_NAME):
 					self._files.append(file.strip()[:-3]);
