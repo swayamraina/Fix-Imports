@@ -65,7 +65,7 @@ class FixImports:
 			return ;
 		for import_pkg in self._failed_imports:
 			try:
-				pip.main(['install',import_pkg]);
+				pip.main(['install',import_pkg,'--user']);
 			except SystemExit as error:
 				print(error);
 
