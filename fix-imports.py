@@ -34,10 +34,12 @@ class FixImports:
 						index = index + 1;
 						while words[index] == '':
 							index = index + 1;
-						if words[index].endswith(';'):
-							imports.append(words[index][:-1]);
-						else:
-							imports.append(words[index]);
+						pkg = words[index].split('.')[0];
+						if len(pkg) > 0:
+							if pkg.endswith(';'):
+								imports.append(pkg[:-1]);
+							else:
+								imports.append(pkg);
 						break;
 		return imports;
 
