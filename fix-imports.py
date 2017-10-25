@@ -1,10 +1,11 @@
 import os;
 
 
-class FixImports:
+_EMPTY = ""
+_SCRIPT_NAME = 'fix-imports.py'
 
-	
-	_SCRIPT_NAME = 'fix-imports.py';
+
+class FixImports:
 
 
 	def __init__(self, project_path):
@@ -75,9 +76,9 @@ class FixImports:
 	def fix(self):
 		for root, dirs, files in os.walk(self._project_path):
 			for file in files:
-				if file.strip().endswith('.py') and (file != self._SCRIPT_NAME):
+				if file.strip().endswith('.py') and (file != _SCRIPT_NAME):
 					self._files.append(file.strip()[:-3]);
-					file_content = self.read_file(root + '/' + file);
+					file_content = self.read_file(_EMPTY.join([root,'/',file]));
 					for import_pkg in self.extract_imports(file_content):
 						if import_pkg not in self._imports:
 							self._imports.append(import_pkg);
