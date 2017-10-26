@@ -51,8 +51,8 @@ class FixImports:
 				self._imports.remove(file);
 
 
-	def try_imports(self):
-		for import_pkg in self._imports:
+	def try_imports(self, packages):
+		for import_pkg in packages:
 			try:
 				__import__(import_pkg);
 			except ImportError as error:
@@ -60,13 +60,13 @@ class FixImports:
 				self._failed_imports.append(import_pkg);
 
 
-	def download_libraries(self):
+	def download_libraries(self, packages):
 		try:
 			import pip;
 		except ImportError as error:
 			print(error);
 			return ;
-		for import_pkg in self._failed_imports:
+		for import_pkg in packages:
 			try:
 				pip.main(['install',import_pkg,'--user']);
 			except SystemExit as error:
@@ -83,8 +83,8 @@ class FixImports:
 						if import_pkg not in self._imports:
 							self._imports.append(import_pkg);
 		self.remove_local_packages();
-		self.try_imports();
-		self.download_libraries();
+		self.try_imports(self._imports);
+		self.download_libraries(self._failed_imports);
 
 
 
