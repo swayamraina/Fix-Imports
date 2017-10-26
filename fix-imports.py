@@ -51,13 +51,13 @@ class FixImports:
 				self._imports.remove(file);
 
 
-	def try_imports(self, packages):
+	def try_imports(self, packages, append=False):
 		for import_pkg in packages:
 			try:
 				__import__(import_pkg);
 			except ImportError as error:
 				print(error);
-				self._failed_imports.append(import_pkg);
+				if append: self._failed_imports.append(import_pkg);
 
 
 	def download_libraries(self, packages):
