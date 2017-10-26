@@ -83,7 +83,7 @@ class FixImports:
 						if import_pkg not in self._imports:
 							self._imports.append(import_pkg);
 		self.remove_local_packages();
-		self.try_imports(self._imports);
+		self.try_imports(self._imports, True);
 		self.download_libraries(self._failed_imports);
 
 
